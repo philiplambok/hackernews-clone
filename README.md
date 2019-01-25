@@ -1,24 +1,7 @@
-# README
+# Overview
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+*Currenly still working on progress*
 
-Things you may want to cover:
+This is experiment project to implement clean, high quality and high level refactoring.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Original version: [https://news.ycombinator.com/](https://news.ycombinator.com/)

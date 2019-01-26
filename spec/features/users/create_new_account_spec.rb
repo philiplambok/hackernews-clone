@@ -36,7 +36,9 @@ feature 'Account Register' do
 
     context 'without password confirmation' do
       scenario "User got 'password_confirmation doesn't match' error message" do
-        sign_up = Page::Event.new(attributes_for(:user, password_confirmation: nil))
+        sign_up = Page::Event.new(
+          attributes_for(:user, password_confirmation: nil)
+        )
 
         sign_up.create
 

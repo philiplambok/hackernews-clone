@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to new_user_path, flash: { success: 'Account has been succesfully registered' }
     else
-      redirect_to new_user_path, flash: { error: @user.errors.full_messages.join(',') }
+      redirect_to new_user_path, flash: { danger: @user.errors.full_messages }
     end
   end
 

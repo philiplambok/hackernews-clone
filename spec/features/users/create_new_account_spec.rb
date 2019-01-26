@@ -3,6 +3,12 @@
 require 'rails_helper'
 
 feature 'Account Register' do
+  before do
+    visit new_user_path
+  end
+
+  include_examples 'title page', 'Hacker News Clone | Account Register'
+
   context 'with valid params' do
     scenario 'User creates new account' do
       sign_up = Page::Event.new(attributes_for(:user))

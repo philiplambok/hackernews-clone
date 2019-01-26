@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap";
+
+.min-height-400 {
+  min-height: 675px;
+}

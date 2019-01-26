@@ -49,14 +49,11 @@ feature 'Account Register' do
 end
 
 module Page
-  class Event
-    include Rails.application.routes.url_helpers
-    include Capybara::DSL
-
-    def initialize(options)
-      @username = options[:username]
-      @password = options[:password]
-      @password_confirmation = options[:password_confirmation]
+  class Event < BaseTest
+    def initialize(user_params)
+      @username = user_params[:username]
+      @password = user_params[:password]
+      @password_confirmation = user_params[:password_confirmation]
     end
 
     def create

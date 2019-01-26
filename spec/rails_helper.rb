@@ -34,6 +34,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 require 'shoulda/matchers'
+require_relative 'page'
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

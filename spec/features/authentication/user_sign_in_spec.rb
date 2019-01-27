@@ -3,35 +3,63 @@
 require 'rails_helper'
 
 feature 'Authentication' do
+  before { visit login_path }
+
+  include_examples 'title page', 'Hacker News Clone | Account Login'
+
   context 'with valid params' do
     let!(:user) { create(:user) }
 
     scenario 'User sign in to system' do
-      visit login_path
+      event = Page::SignIn.new(attributes_for(:user))
 
-      fill_in :username, with: user.username
-      fill_in :password, with: user.password
+      event.sign_in
 
-      click_button 'Login'
-
-      expect(page.current_path).to eq root_path
-      expect(page).to have_content user.username
+      expect(event).to be_success
     end
   end
 
   context 'with invalid params' do
-    let(:hacker) { build(:user, username: 'hacker') }
-
     scenario 'Hacker sign in to system' do
-      visit login_path
+      event = Page::SignIn.new(attributes_for(:user, username: 'hacker'))
 
-      fill_in :username, with: hacker.username
-      fill_in :password, with: hacker.password
+      event.sign_in
+
+      expect(event).to be_error_credentials
+    end
+  end
+end
+
+module Page
+  class SignIn < BaseTest
+    def initialize(auth_params)
+      @username = auth_params[:username]
+      @password = auth_params[:password]
+    end
+
+    def sign_in
+      fill_in :username, with: @username
+      fill_in :password, with: @password
 
       click_button 'Login'
+    end
 
-      expect(page.current_path).to eq login_path
-      expect(page).to have_content 'Credentials was invalid!'
+    def success?
+      to_root_path? && has_content?(@username)
+    end
+
+    def error_credentials?
+      to_login_page? && has_content?('Credentials was invalid')
+    end
+
+    private
+
+    def to_root_path?
+      page.current_path == root_path
+    end
+
+    def to_login_page?
+      page.current_path == login_path
     end
   end
 end

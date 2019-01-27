@@ -14,9 +14,16 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6 bg-light min-height-400">
-          <%= render 'shared/message' %>
 
-          <%= yield %>
+          <%= render 'shared/header' %>
+
+          <div class="row">
+            <div class="col-md-12">
+              <%= render 'shared/message' %>
+
+              <%= yield %>
+            </div>
+          </div>
         </div>
       </div>
     </div>

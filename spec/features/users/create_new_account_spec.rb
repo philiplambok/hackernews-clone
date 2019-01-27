@@ -81,7 +81,7 @@ module Page
     end
 
     def error?(attributes)
-      send("error_#{attributes.to_s}?")
+      send("error_#{attributes}?")
     end
 
     def error_username?

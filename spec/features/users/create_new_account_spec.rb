@@ -9,7 +9,7 @@ feature 'Account Register' do
 
   context 'with valid params' do
     scenario 'User creates new account' do
-      sign_up = Page::Event.new(attributes_for(:user))
+      sign_up = Page::SignUp.new(attributes_for(:user))
 
       sign_up.create
 
@@ -20,7 +20,7 @@ feature 'Account Register' do
   context 'with invalid params' do
     context 'without username' do
       scenario "User got 'username can't be blank' error message" do
-        sign_up = Page::Event.new(attributes_for(:user, username: nil))
+        sign_up = Page::SignUp.new(attributes_for(:user, username: nil))
 
         sign_up.create
 
@@ -30,7 +30,7 @@ feature 'Account Register' do
 
     context 'without password' do
       scenario "User got 'password can't be blank' error message" do
-        sign_up = Page::Event.new(attributes_for(:user, password: nil))
+        sign_up = Page::SignUp.new(attributes_for(:user, password: nil))
 
         sign_up.create
 
@@ -40,7 +40,7 @@ feature 'Account Register' do
 
     context 'without password confirmation' do
       scenario "User got 'password_confirmation doesn't match' error message" do
-        sign_up = Page::Event.new(
+        sign_up = Page::SignUp.new(
           attributes_for(:user, password_confirmation: nil)
         )
 
@@ -53,7 +53,7 @@ feature 'Account Register' do
 end
 
 module Page
-  class Event < BaseTest
+  class SignUp < BaseTest
     def initialize(user_params)
       @username = user_params[:username]
       @password = user_params[:password]

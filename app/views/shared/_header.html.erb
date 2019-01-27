@@ -2,7 +2,7 @@
   <div class="col-md-12 bg-primary d-flex justify-content-between py-2">
     <div>
       <% if signed_in? %>
-        <span class="font-weight-bold">Hi, <%= current_user.username %></span>
+        <span class="font-weight-bold text-light">Hi, <%= current_user.username %></span>
       <% else %>
         <%= link_to 'Login', login_path, class: 'font-weight-bold no-underline text-light' %>
       <% end %>

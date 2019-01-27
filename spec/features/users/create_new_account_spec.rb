@@ -3,9 +3,7 @@
 require 'rails_helper'
 
 feature 'Account Register' do
-  before do
-    visit new_user_path
-  end
+  before { visit new_user_path }
 
   include_examples 'title page', 'Hacker News Clone | Account Register'
 
@@ -26,7 +24,7 @@ feature 'Account Register' do
 
         sign_up.create
 
-        expect(sign_up).to be_error_username_cant_be_blank
+        expect(sign_up).to be_error(:username)
       end
     end
 
@@ -36,7 +34,7 @@ feature 'Account Register' do
 
         sign_up.create
 
-        expect(sign_up).to be_error_password_cant_be_blank
+        expect(sign_up).to be_error(:password)
       end
     end
 
@@ -48,7 +46,7 @@ feature 'Account Register' do
 
         sign_up.create
 
-        expect(sign_up).to be_error_password_confirmation_doesnt_match
+        expect(sign_up).to be_error(:password_confirmation)
       end
     end
   end
@@ -71,18 +69,30 @@ module Page
     end
 
     def success?
+      success_message? && stored?
+    end
+
+    def success_message?
       has_content? 'Account has been succesfully registered'
     end
 
-    def error_username_cant_be_blank?
+    def stored?
+      User.last.username == @username
+    end
+
+    def error?(attributes)
+      send("error_#{attributes.to_s}?")
+    end
+
+    def error_username?
       has_content? "Username can't be blank"
     end
 
-    def error_password_cant_be_blank?
+    def error_password?
       has_content? "Password can't be blank"
     end
 
-    def error_password_confirmation_doesnt_match?
+    def error_password_confirmation?
       has_content? "Password confirmation doesn't match"
     end
   end

@@ -14,6 +14,15 @@
  *= require_self
  */
 
+/* import the necessary Bootstrap files */
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+
+$theme-colors: (
+  primary: $pink
+);
+
+/* finally, import Bootstrap */
 @import "bootstrap";
 
 .min-height-400 {

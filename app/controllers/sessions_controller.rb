@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       sign_in(user)
       redirect_to root_path, flash: { success: 'User logged in' }
     else
-      redirect_to root_path, flash: { error: 'Credentials was invalid!' }
+      redirect_to login_path, flash: { danger: 'Credentials was invalid!' }
     end
   end
 end

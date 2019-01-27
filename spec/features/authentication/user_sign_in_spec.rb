@@ -18,4 +18,20 @@ feature 'Authentication' do
       expect(page).to have_content user.username
     end
   end
+
+  context 'with invalid params' do
+    let(:hacker) { build(:user, username: 'hacker') }
+
+    scenario 'Hacker sign in to system' do
+      visit login_path
+
+      fill_in :username, with: hacker.username
+      fill_in :password, with: hacker.password
+
+      click_button 'Login'
+
+      expect(page.current_path).to eq login_path
+      expect(page).to have_content 'Credentials was invalid!'
+    end
+  end
 end
